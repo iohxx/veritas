@@ -1,0 +1,75 @@
+{
+  "$defs": {
+    "Finding": {
+      "additionalProperties": false,
+      "properties": {
+        "source_index": {
+          "maximum": 19,
+          "minimum": 0,
+          "title": "Source Index",
+          "type": "integer"
+        },
+        "relation": {
+          "enum": [
+            "direct",
+            "indirect",
+            "insufficient",
+            "contradicts",
+            "inconclusive"
+          ],
+          "title": "Relation",
+          "type": "string"
+        },
+        "quote": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "title": "Quote",
+          "type": "string"
+        },
+        "reason": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "title": "Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_index",
+        "relation",
+        "quote",
+        "reason"
+      ],
+      "title": "Finding",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "full_claim_supported": {
+      "title": "Full Claim Supported",
+      "type": "boolean"
+    },
+    "findings": {
+      "items": {
+        "$ref": "#/$defs/Finding"
+      },
+      "maxItems": 40,
+      "title": "Findings",
+      "type": "array"
+    },
+    "reason": {
+      "maxLength": 2000,
+      "minLength": 1,
+      "title": "Reason",
+      "type": "string"
+    }
+  },
+  "required": [
+    "full_claim_supported",
+    "findings",
+    "reason"
+  ],
+  "title": "Analysis",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

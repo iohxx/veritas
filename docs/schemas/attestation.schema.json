@@ -1,0 +1,74 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "type": {
+      "const": "VERITAS_ATTESTATION",
+      "title": "Type",
+      "type": "string"
+    },
+    "version": {
+      "const": "1.0",
+      "title": "Version",
+      "type": "string"
+    },
+    "canonicalization": {
+      "const": "VERITAS-C14N-1",
+      "title": "Canonicalization",
+      "type": "string"
+    },
+    "job_id": {
+      "title": "Job Id",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "VERIFIED",
+        "PARTIALLY_VERIFIED",
+        "UNVERIFIED",
+        "CONTRADICTED",
+        "INSUFFICIENT_EVIDENCE"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "confidence": {
+      "maximum": 100,
+      "minimum": 0,
+      "title": "Confidence",
+      "type": "integer"
+    },
+    "evidence_hash": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Evidence Hash",
+      "type": "string"
+    },
+    "verifier": {
+      "title": "Verifier",
+      "type": "string"
+    },
+    "timestamp": {
+      "title": "Timestamp",
+      "type": "string"
+    },
+    "signature": {
+      "pattern": "^[A-Za-z0-9_-]{86}$",
+      "title": "Signature",
+      "type": "string"
+    }
+  },
+  "required": [
+    "type",
+    "version",
+    "canonicalization",
+    "job_id",
+    "status",
+    "confidence",
+    "evidence_hash",
+    "verifier",
+    "timestamp",
+    "signature"
+  ],
+  "title": "Attestation",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

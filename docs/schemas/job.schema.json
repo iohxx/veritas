@@ -1,0 +1,150 @@
+{
+  "$defs": {
+    "Calculation": {
+      "additionalProperties": false,
+      "properties": {
+        "operation": {
+          "enum": [
+            "add",
+            "subtract",
+            "multiply",
+            "divide",
+            "percentage_change",
+            "mean",
+            "ratio",
+            "convert",
+            "compare"
+          ],
+          "title": "Operation",
+          "type": "string"
+        },
+        "operands": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 30,
+          "minItems": 1,
+          "title": "Operands",
+          "type": "array"
+        },
+        "expected": {
+          "maxLength": 100,
+          "title": "Expected",
+          "type": "string"
+        },
+        "source_indices": {
+          "items": {
+            "type": "integer"
+          },
+          "maxItems": 20,
+          "title": "Source Indices",
+          "type": "array"
+        },
+        "unit_from": {
+          "default": "",
+          "maxLength": 20,
+          "title": "Unit From",
+          "type": "string"
+        },
+        "unit_to": {
+          "default": "",
+          "maxLength": 20,
+          "title": "Unit To",
+          "type": "string"
+        }
+      },
+      "required": [
+        "operation",
+        "operands",
+        "expected"
+      ],
+      "title": "Calculation",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "type": {
+      "const": "VERITAS_JOB",
+      "title": "Type",
+      "type": "string"
+    },
+    "version": {
+      "const": "1.0",
+      "title": "Version",
+      "type": "string"
+    },
+    "job_id": {
+      "title": "Job Id",
+      "type": "string"
+    },
+    "requester": {
+      "title": "Requester",
+      "type": "string"
+    },
+    "task_type": {
+      "const": "research_verification",
+      "title": "Task Type",
+      "type": "string"
+    },
+    "claim": {
+      "maxLength": 8000,
+      "minLength": 1,
+      "title": "Claim",
+      "type": "string"
+    },
+    "sources": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 20,
+      "title": "Sources",
+      "type": "array"
+    },
+    "submitted_result": {
+      "maxLength": 16000,
+      "minLength": 1,
+      "title": "Submitted Result",
+      "type": "string"
+    },
+    "created_at": {
+      "title": "Created At",
+      "type": "string"
+    },
+    "nonce": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_-]+$",
+      "title": "Nonce",
+      "type": "string"
+    },
+    "calculations": {
+      "items": {
+        "$ref": "#/$defs/Calculation"
+      },
+      "maxItems": 30,
+      "title": "Calculations",
+      "type": "array"
+    },
+    "extensions": {
+      "additionalProperties": true,
+      "title": "Extensions",
+      "type": "object"
+    }
+  },
+  "required": [
+    "type",
+    "version",
+    "job_id",
+    "requester",
+    "task_type",
+    "claim",
+    "sources",
+    "submitted_result",
+    "created_at",
+    "nonce"
+  ],
+  "title": "Job",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}
