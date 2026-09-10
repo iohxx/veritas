@@ -1,0 +1,12 @@
+{
+  "type": "VERITAS_JOB",
+  "version": "1.0",
+  "job_id": "job_demo_sum_incorrect",
+  "requester": "did:key:z6MkehRgf7yJbgaGfYsdoAsKdBPE3dj2CYhowQdcjqSJgvVd",
+  "task_type": "research_verification",
+  "claim": "The total of 10 + 20 + 30 is 61.",
+  "sources": [],
+  "submitted_result": "The total of 10 + 20 + 30 is 61.",
+  "created_at": "2026-09-10T00:00:00Z",
+  "nonce": "job_demo_sum_incorrect"
+}
