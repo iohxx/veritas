@@ -1,0 +1,5 @@
+include README.md LICENSE AGENTS.md .env.example requirements.txt
+recursive-include docs *.md *.json
+recursive-include examples *.json
+recursive-include scripts *.py
+recursive-include tests *.py

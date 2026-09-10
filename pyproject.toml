@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "veritas-agent"
+version = "0.1.0"
+description = "Independent evidence verification and Ed25519 attestations"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = ["cryptography>=42", "pydantic>=2.7,<3"]
+license = "MIT"
+
+[project.scripts]
+veritas = "veritas.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["veritas*"]
