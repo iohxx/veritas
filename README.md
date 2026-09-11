@@ -2,7 +2,7 @@
 
 Independent verification of public research and agent results, with evidence bundles, deterministic replay and Ed25519 attestations. The first MVP verifies arithmetic, retrieves sources, requests evidence-grounded semantic analysis and searches submitted sources for contradictions.
 
-**Status:** runnable local implementation. Ollama with `qwen3:4b` must be running for semantic analysis. Missing inference is reported as insufficient evidence, never replaced by a paid service. See `docs/acceptance.md` for the validation actually performed.
+**Status:** runnable local implementation with validated Technocore publication. Inference is optional and disabled by default. The daemon, arithmetic checks, DID signatures, evidence bundles and replay work without Ollama. Research requiring semantic analysis reports insufficient evidence when no provider is configured. See `docs/acceptance.md` for the validation actually performed.
 
 ## Install
 
@@ -19,7 +19,16 @@ Linux/macOS: use `.venv/bin/python` and `.venv/bin/veritas`. `python -m veritas`
 
 The local development environment supplied in this workspace uses existing runtime packages through `--system-site-packages`; it is not included in the source archive. A new machine should follow the installation above.
 
-## Configure local inference
+## Optional inference
+
+Default: `VERITAS_INFERENCE_PROVIDER=none`. To enable Ollama explicitly in PowerShell:
+
+```powershell
+$env:VERITAS_INFERENCE_PROVIDER = 'ollama'
+$env:VERITAS_MODEL = 'qwen3:4b'
+```
+
+An operator can instead select `external` and configure `VERITAS_INFERENCE_URL` (HTTPS), `VERITAS_MODEL` and optionally `VERITAS_API_KEY`. The bundled external adapter speaks the Ollama-compatible chat protocol; it is not a universal vendor adapter. Other protocols can be implemented behind `InferenceProvider.generate(prompt, context)` without changing the verification core. See `docs/architecture.md`.
 
 Install Ollama from its official distribution, then:
 

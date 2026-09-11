@@ -28,7 +28,7 @@ Logs structurés à champs contrôlés, sans secrets ni contenu brut non fiable.
 
 ## Travail et tests
 L'inspection initiale est terminée. L'utilisateur a ensuite autorisé la construction du MVP complet dans une même session.
-Fournisseur MVP : Ollama local avec qwen3:4b, derrière InferenceProvider. Ne pas requérir de service payant, de clé OpenAI ou de Codex/ChatGPT à l'exécution. Si Ollama ou le modèle manque, signaler cette dépendance sans substituer un autre service.
+Priorité confirmée le 2026-09-11 : intégration Technocore validée ; autonomie, attestations DID, preuves, replay et modularité. Ollama/Qwen est un fournisseur optionnel, interchangeable derrière InferenceProvider, jamais une dépendance fondamentale. Ne pas optimiser Qwen pour le moment. L'inférence est désactivée par défaut ; son absence produit un verdict conservateur pour les recherches, sans empêcher les calculs, signatures, preuves, replay ou le daemon. Ne pas requérir de service payant, de clé OpenAI ou de Codex/ChatGPT à l'exécution.
 Technocore confirmé par l'utilisateur : https://technocore.chat ; documentation https://technocore.chat/llms.txt et https://technocore.chat/openapi.json.
 Suite : identité → schéma de job → pipeline → calculs → inférence → verdict → signature → vérification hors ligne → Technocore → replay → tests de bout en bout.
 Ne pas passer à l'étape suivante si l'étape actuelle est cassée.
