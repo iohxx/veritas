@@ -1,31 +1,18 @@
 import argparse
 import json
-import os
 import sqlite3
 from pathlib import Path
 from veritas.config import Config
 from veritas.identity.keys import Identity
 from veritas.storage.jobs import Store, read_json
 from veritas.security.limits import ProcessLock
-from veritas.inference.local import LocalInferenceProvider
-from veritas.inference.external import ExternalInferenceProvider
-from veritas.inference.base import UnavailableProvider
+from veritas.inference.factory import provider_for
 from veritas.verification.pipeline import Pipeline, replay
 from veritas.attestation.verify import check_bundle
 from veritas.technocore.client import TechnocoreClient
 from veritas.technocore.sender import publish
 from veritas.agent.daemon import run
 from veritas.errors import VeritasError
-
-
-def provider_for(config):
-    if config.inference_provider=='ollama':
-        return LocalInferenceProvider(config.model,config.inference_url)
-    if config.inference_provider=='external':
-        return ExternalInferenceProvider(config.inference_url,config.model,os.environ.get('VERITAS_API_KEY'))
-    if config.inference_provider=='none':
-        return UnavailableProvider()
-    raise VeritasError('unknown_inference_provider')
 
 
 def main(argv=None):
@@ -83,8 +70,8 @@ def main(argv=None):
                 with args.job.open('rb') as f:
                     attestation=pipeline.verify(f.read(config.max_job_size+1))
                 analysis=read_json(store.job_path(attestation['job_id'])/'evidence'/'checks.json')['semantic']
-                if analysis.get('reason')=='ollama_unavailable_or_invalid_response':
-                    print('SEMANTIC ANALYSIS UNAVAILABLE: start Ollama and install the configured model.')
+                if not analysis.get('performed') and analysis.get('reason')!='not_applicable_pure_arithmetic':
+                    print('SEMANTIC ANALYSIS NOT PERFORMED: '+analysis.get('reason','unknown'))
                 print(json.dumps(attestation,indent=2))
                 if args.publish:
                     print(json.dumps(publish(attestation,identity,client,store,config.max_posts_per_hour)))

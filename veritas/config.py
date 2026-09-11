@@ -18,7 +18,7 @@ class Config:
     max_source_size: int = 1048576
     max_job_size: int = 65536
     request_timeout: int = 15
-    inference_provider: str = 'ollama'
+    inference_provider: str = 'none'
     inference_url: str = 'http://127.0.0.1:11434/api/chat'
     model: str = 'qwen3:4b'
     weights: dict = field(default_factory=lambda: DEFAULT_WEIGHTS.copy())
